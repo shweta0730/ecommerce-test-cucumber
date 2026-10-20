@@ -3,10 +3,7 @@ package pageobject;
 import elements.Auth;
 import factory.ConfigReader;
 import factory.DriverFactory;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -55,4 +52,19 @@ public class AuthPageObject {
         confirmPasswordInput.sendKeys(password);
     }
 
+    public void clickAccountCreateButton() throws InterruptedException {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(Auth.createAccountButton));
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});",
+                element
+        );
+        Thread.sleep(2000);
+        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+    }
+
+    public void verifyRegistration() {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(Auth.productCatalogHeading));
+        String actualText = element.getText().trim();
+        Assert.assertEquals(actualText, "Product Catalog", "After clicking on create account I'm not able to see home page");
+    }
 }

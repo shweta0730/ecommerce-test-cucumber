@@ -12,5 +12,5 @@ public class Auth {
     public static By password = By.xpath("//*[@id=\"password\"]");
     public static By confirmPassword = By.xpath("//*[@id=\"confirmPassword\"]");
     public static By createAccountButton = By.xpath("//*[@id=\"root\"]/div/main/div/div/div[2]/div/form/button");
-
+    public static By productCatalogHeading = By.cssSelector("h1[data-testid='catalog-heading']");
 }
